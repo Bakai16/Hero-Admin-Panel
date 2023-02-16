@@ -1,6 +1,6 @@
-import { createStore, combineReducers, compose, applyMiddleware} from 'redux';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import ReduxThunk from 'redux-thunk';
+// import { createStore, combineReducers, compose, applyMiddleware} from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+// import ReduxThunk from 'redux-thunk'; не использую
 import heroes from '../reducers/heroes';
 import filters from '../reducers/filters';
 
