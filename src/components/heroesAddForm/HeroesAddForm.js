@@ -1,9 +1,9 @@
-import {useHttp} from '../../hooks/http.hook';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import store from '../../store';
 
-import { heroCreated } from '../../components/heroesList/heroesSlice';
+import { selectAll } from '../heroesFilters/filtersSlice';
 import { useCreateHeroMutation } from '../../api/apiSlice';
 
 const HeroesAddForm = () => {
@@ -11,11 +11,10 @@ const HeroesAddForm = () => {
     const [heroDescr, setHeroDescr] = useState('');
     const [heroElement, setHeroElement] = useState('');
 
-    const [createHero, {isLoading}] = useCreateHeroMutation();
+    const [createHero] = useCreateHeroMutation();
 
-    const {filters, filtersLoadingStatus} = useSelector(state => state.filters);
-    const dispatch = useDispatch();
-    const {request} = useHttp();
+    const {filtersLoadingStatus} = useSelector(state => state.filters);
+    const filters = selectAll(store.getState());
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -24,9 +23,9 @@ const HeroesAddForm = () => {
             name: heroName,
             description: heroDescr,
             element: heroElement
-        } 
+        }
 
-        createHero(newHero).unwrap(); 
+        createHero(newHero).unwrap();
 
         setHeroName('');
         setHeroDescr('');
