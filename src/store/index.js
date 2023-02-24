@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 // import ReduxThunk from 'redux-thunk'; не использую
 import heroes from '../components/heroesList/heroesSlice';
 import filters from '../reducers/filters';
+import { apiSlice } from '../api/apiSlice';
 
 const stringMiddleware = () => (next) => (action) =>{
     if(typeof action === 'string'){
@@ -21,9 +22,13 @@ const stringMiddleware = () => (next) => (action) =>{
 //                     ));
 
 const store = configureStore({
-    reducer: {heroes, filters}, 
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddleware), 
-    devTools: process.env.NODE_ENV !== 'production', 
-})
+    reducer: {
+        heroes,
+        filters, 
+        [apiSlice.reducerPath]: apiSlice.reducer
+    }, 
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddleware, apiSlice.middleware), 
+    devTools: process.env.NODE_ENV !== 'production'
+}) 
 
 export default store;
