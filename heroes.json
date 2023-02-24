@@ -11,6 +11,12 @@
       "name": "Erbol",
       "description": "sfdgfb",
       "element": "water"
+    },
+    {
+      "id": "0a1abe6c-017d-4bac-94be-cb3a03ec5e80",
+      "name": "Bakai",
+      "description": "JDFJ",
+      "element": "fire"
     }
   ],
   "filters": [
