@@ -40,11 +40,6 @@ const heroesSlice = createSlice({
 
 const { actions, reducer } = heroesSlice;
 
-export default reducer;
-
-const {selectAll} = heroesAdapter.getSelectors(state => state.heroes); 
-
-
 export const filteredHeroesSelector = createSelector(
     (state) => state.filters.activeFilter,
     selectAll,
@@ -56,12 +51,15 @@ export const filteredHeroesSelector = createSelector(
         }
     }
 );
-  
+
+export default reducer;
+
+const {selectAll} = heroesAdapter.getSelectors(state => state.heroes); 
 
 export const {
     heroesFetching,
     heroesFetched,
-    heroesFetchingError,
+    heroesFetchingError, 
     heroCreated,
     heroDeleted   
 } = actions;
